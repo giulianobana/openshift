@@ -18,36 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class HomeController {
 	
-	@Autowired  
-	CustomerRepository customerRepositoy;
-	
-	private ArrayList<Employee> employee = new ArrayList<Employee>();
-	
-	
-    @RequestMapping(value = "/customer", method = RequestMethod.POST)
-    public void create(@RequestBody Customer customer) {
-    	customerRepositoy.save(customer);
-    }
     
     @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
     public Customer get(@PathVariable("id") Integer id) {
-
-     Optional<Customer> optCustomer = customerRepositoy.findById(id);
-     return optCustomer.get();
+    
+    Customer customer = new Customer();
+    customer.setId(1);
+    customer.setDescription("description");
+    customer.setFirstName("firstName");
+    return customer;
     }
     
-    @RequestMapping(value = "/customer/active", method = RequestMethod.GET)
-    public Collection<Customer> getActive() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
-    	return customerRepositoy.getAllActive();	
-    }    
-    
-    
-    @RequestMapping(value = "/customer/actived", method = RequestMethod.GET)
-    public Collection<Customer> getActived() throws InterruptedException {
-   
-    TimeUnit.SECONDS.sleep(2);
-    return customerRepositoy.getAllActive();	
-    }
-
 }	
